@@ -1,0 +1,44 @@
+﻿@model LivrariaBCC.Entity.Livro
+
+@{
+    ViewBag.Title = "Adicionar";
+}
+
+<h2>@ViewBag.Title livro</h2>
+
+@using (Html.BeginForm("Salvar", "Livro", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ISBN)
+        @Html.TextBoxFor(m => m.ISBN, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Autor)
+        @Html.TextBoxFor(m => m.Autor, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nome)
+        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Preco)
+        @Html.TextBoxFor(m => m.Preco, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DataPublicacao)
+        @Html.TextBoxFor(m => m.DataPublicacao, "{0:dd/MM/yyyy}", new { type = "date", @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.HiddenFor(m => m.ImagemCapa)
+        <label for="UploadFile">Imagem Capa</label>
+        @Html.TextBox("UploadFile", "", new { type = "file", @class = "form-control-file" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+}

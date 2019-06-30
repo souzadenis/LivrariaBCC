@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listagem de livros</h2>
+
+@Html.ActionLink("Adicionar Livro", "Editar", "Livro")
+
+
+<table border="1">
+    <tr>
+        <th>
+            ISBN
+        </th>
+        <th>
+            Autor
+        </th>
+        <th>
+            Nome
+        </th>
+        <th>
+            Preço
+        </th>
+        <th>
+            Data de Publicaçãoo
+        </th>
+        <th>
+            Imagem Capa
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var i in ViewBag.result)
+    {
+        <tr>
+            <td>@i.ISBN</td>
+            <td>@i.Autor</td>
+            <td>@i.Nome</td>
+            <td>@i.Preco</td>
+            <td>@i.DataPublicacao</td>
+            <td>@i.ImagemCapa</td>
+            <td>@Html.ActionLink("Editar", "Editar", "Livro", new { @i.Id }, new { })</td>
+            <td>@Html.ActionLink("Excluir", "Excluir", "Livro", new { @i.Id }, new { })</td>
+        </tr>
+    }
+</table>
