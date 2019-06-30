@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaBCC.API", "src\Livr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaBCC.Entity", "src\LivrariaBCC.Entity\LivrariaBCC.Entity.csproj", "{6C9F9B91-875A-40F8-A806-A6C253689CF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaBCC.Tests", "src\LivrariaBCC.Tests\LivrariaBCC.Tests.csproj", "{09136B83-2B6E-4D5C-AA1D-48E0E787ACB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6C9F9B91-875A-40F8-A806-A6C253689CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C9F9B91-875A-40F8-A806-A6C253689CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C9F9B91-875A-40F8-A806-A6C253689CF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09136B83-2B6E-4D5C-AA1D-48E0E787ACB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09136B83-2B6E-4D5C-AA1D-48E0E787ACB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09136B83-2B6E-4D5C-AA1D-48E0E787ACB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09136B83-2B6E-4D5C-AA1D-48E0E787ACB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

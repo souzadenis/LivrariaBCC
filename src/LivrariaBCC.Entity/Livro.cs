@@ -1,20 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace LivrariaBCC.Entity
 {
     public class Livro
     {
+        [Key]
         public int Id { get; set; }
+        [Required]
+        [StringLength(17, MinimumLength = 17, ErrorMessage = "ISBN deve conter 17 caracteres")]
         public string ISBN { get; set; }
+        [Required]
         public string Autor { get; set; }
+        [Required]
         public string Nome { get; set; }
+        [Required]
         public double Preco { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required]
         public DateTime DataPublicacao { get; set; }
         public string ImagemCapa { get; set; }
     }

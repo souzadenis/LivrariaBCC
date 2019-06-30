@@ -4,13 +4,13 @@
     margin-bottom: 20px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.img-capa {
+    max-width: 250px;
 }
 
-form {
-    padding: 20px 15px;
+.caixa-busca {
+    background-color: #f1f1f1;
+    border: solid 1px #d0d0d0;
+    border-radius: 10px;
+    padding: 10px 10px 0;
 }

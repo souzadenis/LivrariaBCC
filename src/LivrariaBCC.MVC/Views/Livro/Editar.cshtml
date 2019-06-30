@@ -6,39 +6,93 @@
 
 <h2>@ViewBag.Title livro</h2>
 
-@using (Html.BeginForm("Salvar", "Livro", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+@if (ViewBag.result != null && ViewBag.result != "")
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.result
+    </div>
+}
+
+@using (Html.BeginForm("Editar", "Livro", FormMethod.Post, new { enctype = "multipart/form-data", @class = "needs-validation", novalidate = "" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.ISBN)
-        @Html.TextBoxFor(m => m.ISBN, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Autor)
-        @Html.TextBoxFor(m => m.Autor, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Nome)
-        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.ISBN)
+                @Html.TextBoxFor(m => m.ISBN, new { @class = "form-control", required = "" })
+                <div class="invalid-feedback">campo obrigatório</div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Autor)
+                @Html.TextBoxFor(m => m.Autor, new { @class = "form-control", required = "" })
+                <div class="invalid-feedback">campo obrigatório</div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Nome)
+                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", required = "" })
+                <div class="invalid-feedback">campo obrigatório</div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Preco)
+                @Html.TextBoxFor(m => m.Preco, new { @class = "form-control", required = "" })
+                <div class="invalid-feedback">campo obrigatório</div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.DataPublicacao)
+                @Html.TextBoxFor(m => m.DataPublicacao, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control", required = "" })
+                <div class="invalid-feedback">campo obrigatório</div>
+            </div>
+        </div>
+        <div class="col-6">
+            @Html.HiddenFor(m => m.ImagemCapa)
+            <div class="form-group">
+                @if (Model.ImagemCapa != null)
+                {
+                    <img src="@Url.Content("~/Content/Uploads/" + Model.ImagemCapa)" alt="Imagem Capa" class="img-capa" />
+                }
+            </div>
+            <div>
+                <label for="UploadFile">Imagem Capa</label>
+                @if (Model.ImagemCapa != null)
+                {
+                    <input type="file" class="form-control-file" id="UploadFile" name="UploadFile">
+                }
+                else
+                {
+                    <input type="file" class="form-control-file" id="UploadFile" name="UploadFile" required="">
+                }
+                <div class="invalid-feedback">campo obrigatório</div>
+            </div>
+        </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Preco)
-        @Html.TextBoxFor(m => m.Preco, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.DataPublicacao)
-        @Html.TextBoxFor(m => m.DataPublicacao, "{0:dd/MM/yyyy}", new { type = "date", @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.HiddenFor(m => m.ImagemCapa)
-        <label for="UploadFile">Imagem Capa</label>
-        @Html.TextBox("UploadFile", "", new { type = "file", @class = "form-control-file" })
-    </div>
-
-    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="submit" class="btn btn-primary mb-4">Salvar</button>
 }
+
+@Html.ActionLink("Voltar para principal", "Index")
+
+<script>
+
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>

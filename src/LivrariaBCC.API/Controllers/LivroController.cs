@@ -27,7 +27,7 @@ namespace LivrariaBCC.API.Controllers
                 livro.Nome = reader["Nome"].ToString();
                 livro.Preco = Convert.ToDouble(reader["Preco"]);
                 livro.DataPublicacao = Convert.ToDateTime(reader["DataPublicacao"]);
-                livro.ImagemCapa = reader["ImagenCapa"].ToString();
+                livro.ImagemCapa = reader["ImagemCapa"].ToString();
             }
             return livro;
         }
@@ -40,6 +40,27 @@ namespace LivrariaBCC.API.Controllers
                 while (reader.Read())
                     livros.Add(CreateEntity(reader));
 
+            return livros;
+        }
+
+        [HttpGet]
+        [Route("api/LivroSearch")]
+        public IEnumerable<Livro> Search(string isbn = "", string autor = "", string nome = "", double preco = 0, DateTime? dataPublicacao = null, string imagemCapa = "")
+        {
+            List<Livro> livros = new List<Livro>();
+            using (var command = DAOHelper.CreateCommand("Livro_Search"))
+            {
+                command.Parameters.AddWithValue("$ISBN", string.IsNullOrEmpty(isbn) ? DBNull.Value : (object)isbn);
+                command.Parameters.AddWithValue("$Autor", string.IsNullOrEmpty(autor) ? DBNull.Value : (object)autor);
+                command.Parameters.AddWithValue("$Nome", string.IsNullOrEmpty(nome) ? DBNull.Value : (object)nome);
+                command.Parameters.AddWithValue("$Preco", preco == 0 ? DBNull.Value : (object)preco);
+                command.Parameters.AddWithValue("$DataPublicacao", dataPublicacao == null ? DBNull.Value : (object)dataPublicacao);
+                command.Parameters.AddWithValue("$ImagemCapa", string.IsNullOrEmpty(imagemCapa) ? DBNull.Value : (object)imagemCapa);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                    while (reader.Read())
+                        livros.Add(CreateEntity(reader));
+            }
             return livros;
         }
 
@@ -119,5 +140,6 @@ namespace LivrariaBCC.API.Controllers
             else
                 return BadRequest("Não foi possível deleter o livro de Id: " + id.ToString());
         }
+
     }
 }
